@@ -1,121 +1,296 @@
-# Yushan Admin
+# Yushan Monolithic Admin Dashboard
 
-Admin dashboard for the Yushan web novel platform. Built with React, Ant Design, and integrates with the Yushan backend API.
+> 🛠️ **Admin Dashboard for Yushan Platform (Phase 1 - Monolithic)** - Administrative dashboard for the gamified web novel reading platform.
 
-## Features
+## 📋 Overview
 
-- **Authentication**: Real API integration with JWT tokens and automatic refresh
-- **Role-based Access**: Admin-only access with permission management
-- **User Management**: Manage readers, writers, and their details
-- **Content Management**: Novels, chapters, categories, comments, and reviews
-- **Analytics**: Rankings, yuan statistics, and user activity tracking
-- **Security**: Token-based authentication with automatic session management
+This is the admin dashboard for the monolithic version of Yushan Platform, which is Phase 1 of the project. This dashboard provides comprehensive administrative tools to manage users, content, interactions, and analytics.
 
-## Setup
+## 🚀 Tech Stack
+
+- **Framework**: React 18.3.1
+- **Build Tool**: Create React App
+- **Language**: JavaScript
+- **UI Library**: Ant Design 5.27.4
+- **State Management**: Zustand 4.5.5 (optional)
+- **Routing**: React Router DOM 6.26.2
+- **HTTP Client**: Axios 1.12.2
+- **Charts**: Recharts 2.12.7
+- **Testing**: Jest, React Testing Library
+
+## ✨ Key Features
+
+### 🔐 Authentication
+- Admin-only login
+- JWT token authentication
+- Automatic token refresh (every 15 minutes)
+- Session management
+
+### 👥 User Management
+- User list (pagination, filtering)
+- View user details
+- Update user status (active/ban)
+- Promote to Admin
+- Author management
+- User statistics
+
+### 📚 Content Management
+- Novel management (CRUD)
+- Chapter management (CRUD)
+- Category management
+- Content review and approval
+- Hide/show content
+- Cover image upload
+
+### 💬 Interaction Management
+- Comment management
+- Review management
+- Report handling
+- Content moderation
+
+### 📊 Analytics & Reports
+- Dashboard with overview metrics
+- User statistics (DAU, WAU, MAU)
+- Content statistics
+- Rankings
+- Charts and visualizations
+
+### 💰 Gamification Management
+- Yuan transaction management
+- Gamification statistics
+- View user achievements
+
+### 📖 Library Management
+- View user libraries
+- Reading history management
+
+## 🏗️ Project Structure
+
+```
+src/
+├── components/
+│   └── admin/
+│       ├── common/         # Common components (Header, Sidebar, Layout)
+│       ├── charts/         # Chart components
+│       ├── tables/         # Data table components
+│       └── modals/         # Modal components
+├── pages/
+│   └── admin/
+│       ├── dashboard/      # Main dashboard
+│       ├── users/          # User management
+│       ├── novels/         # Novel management
+│       ├── chapters/       # Chapter management
+│       ├── categories/     # Category management
+│       ├── comments/       # Comment management
+│       ├── reviews/        # Review management
+│       ├── reports/        # Report handling
+│       ├── library/        # Library management
+│       ├── rankings/       # Rankings
+│       ├── yuan/           # Yuan management
+│       ├── settings/       # Settings
+│       └── profile/        # Admin profile
+├── services/
+│   └── admin/
+│       ├── api.js          # Axios instance
+│       ├── authservice.js  # Authentication
+│       ├── userservice.js  # User management
+│       ├── novelservice.js # Novel management
+│       ├── chapterservice.js
+│       ├── commentservice.js
+│       ├── reviewservice.js
+│       ├── reportservice.js
+│       ├── analyticsservice.js
+│       ├── rankingservice.js
+│       └── dashboardservice.js
+├── contexts/
+│   └── admin/
+│       ├── adminauthcontext.jsx
+│       └── ...
+├── hooks/
+│   └── admin/
+│       ├── useAdminAuth.js
+│       ├── useDashboardData.js
+│       ├── useDataTable.js
+│       └── ...
+└── styles/
+    └── admin/
+        ├── layout.css
+        ├── sidebar.css
+        └── ...
+```
+
+## 🚦 Getting Started
 
 ### Prerequisites
 
 - Node.js 18.x or higher
 - npm or yarn
-- Yushan backend API running (default: `http://localhost:8080`)
+- Yushan Monolithic Backend running (default: `http://localhost:8080`)
 
 ### Installation
 
-1. Clone the repository
-2. Copy the environment configuration:
-   ```bash
-   cp .env.example .env
-   ```
-3. Update `.env` with your API base URL if different from default
-4. Install dependencies:
+1. Clone repository
+2. Install dependencies:
    ```bash
    npm install
    ```
-5. Start the development server:
+3. Create `.env` file (if needed):
+   ```env
+   REACT_APP_API_BASE_URL=http://localhost:8080/api
+   ```
+4. Start development server:
    ```bash
    npm start
    ```
 
 ### Environment Variables
 
-- `REACT_APP_API_BASE_URL`: Base URL for the Yushan API (default: `http://localhost:8080/api`)
+- `REACT_APP_API_BASE_URL`: Base URL for Yushan API (default: `http://localhost:8080/api`)
 
-## Authentication
+## 📜 Available Scripts
 
-The admin dashboard integrates with the Yushan authentication API:
+### `npm start`
 
-- **Login**: `POST /auth/login` - Requires admin privileges
-- **Logout**: `POST /auth/logout` - Clears session
-- **Refresh**: `POST /auth/refresh` - Automatic token refresh every 15 minutes
+Runs the app in development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+### `npm test`
+
+Launches the test runner in interactive watch mode.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.
+
+### `npm run deploy`
+
+Deploy to GitHub Pages.
+
+## 🔐 Authentication
+
+Admin dashboard integrates with Yushan authentication API:
+
+- **Login**: `POST /api/auth/login` - Requires Admin privileges
+- **Logout**: `POST /api/auth/logout` - Clear session
+- **Refresh**: `POST /api/auth/refresh` - Automatic token refresh every 15 minutes
 
 ### Demo Credentials
 
 - Email: `admin@yushan.com`
 - Password: `admin`
 
-## Available Scripts
+## 🎨 UI Components
 
-In the project directory, you can run:
+### Charts
+- StatCard - Display statistics
+- LineChart - Line chart
+- AreaChart - Area chart
+- BarChart - Bar chart
+- PieChart - Pie chart
 
-### `npm start`
+### Tables
+- DataTable - Data table with pagination, filtering, sorting
+- Export functionality
+- Bulk actions
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Modals
+- UserModal - Create/edit user
+- NovelModal - Create/edit novel
+- CommentModal - View/edit comment
+- ReportModal - Handle report
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📊 Dashboard Features
 
-### `npm test`
+- **Overview Metrics**: Total users, novels, comments, etc.
+- **User Statistics**: DAU, WAU, MAU
+- **Content Statistics**: New novels, new chapters, etc.
+- **Charts**: Visualizations for important metrics
+- **Recent Activity**: Recent activities
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🔗 API Integration
 
-### `npm run build`
+Dashboard connects to the following endpoints:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Auth**: `/api/auth/login`, `/api/auth/logout`, `/api/auth/refresh`
+- **Users**: `/api/admin/users`, `/api/admin/users/{id}`, `/api/admin/promote-to-admin`
+- **Novels**: `/api/admin/novels`, `/api/novels/{id}`
+- **Chapters**: `/api/chapters`, `/api/chapters/{id}`
+- **Comments**: `/api/comments`, `/api/comments/{id}`
+- **Reviews**: `/api/reviews`, `/api/reviews/{id}`
+- **Reports**: `/api/reports`
+- **Analytics**: `/api/analytics/**`
+- **Rankings**: `/api/rankings/**`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🧪 Testing
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+# Run all tests
+npm test
 
-### `npm run eject`
+# Run tests with coverage
+npm run test:ci
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🛠️ Built With
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [React](https://reactjs.org/) - Frontend framework
+- [Create React App](https://create-react-app.dev/) - Build toolchain
+- [Ant Design](https://ant.design/) - UI component library
+- [React Router](https://reactrouter.com/) - Client-side routing
+- [Axios](https://axios-http.com/) - HTTP client
+- [Recharts](https://recharts.org/) - Charts library
+- [Zustand](https://zustand-demo.pmnd.rs/) - State management (optional)
+- [React Testing Library](https://testing-library.com/react) - Testing utilities
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🔐 Security
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Admin-only access
+- JWT token authentication
+- Automatic token refresh
+- Protected routes
+- Session management
 
-## Learn More
+## 📱 Deployment
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Development
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm start
+```
 
-### Code Splitting
+### Production Build
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm run build
+# Deploy the 'build' folder to your hosting service
+```
 
-### Analyzing the Bundle Size
+### GitHub Pages
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+npm run build
+npm run deploy
+```
 
-### Making a Progressive Web App
+## 🤝 Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. Fork repository
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open Pull Request
 
-### Advanced Configuration
+## 📄 License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+This project is part of the Yushan Platform ecosystem.
 
-### Deployment
+## 🔗 Links
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- **Backend**: [yushan-monolithic-backend](https://github.com/phutruonnttn/yushan-monolithic-backend)
+- **Frontend**: [yushan-monolithic-frontend](https://github.com/phutruonnttn/yushan-monolithic-frontend)
+- **Platform Documentation**: [yushan-platform-docs](https://github.com/phutruonnttn/yushan-platform-docs) - Complete documentation for all phases
+- **Phase 2 (Microservices)**: See [Phase 2 Architecture](https://github.com/phutruonnttn/yushan-platform-docs/blob/main/docs/phase2-microservices/PHASE2_MICROSERVICES_ARCHITECTURE.md)
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Yushan Monolithic Admin Dashboard** - Phase 1 of the administrative dashboard 🚀
